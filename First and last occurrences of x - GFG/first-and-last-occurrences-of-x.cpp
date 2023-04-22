@@ -7,20 +7,41 @@ vector<int> find(int arr[], int n , int x )
 {
     int fi = -1;
     int li = -1;
-    int chck = 0;
-    for(int i=0;i<n;i++){
-        if(chck==0){
-            if(arr[i]==x){
-                fi = i;
-                li = i;
-                chck = 1;
-            }
+    
+    int i = 0;
+    int j = n;
+    while(i<j){
+        int mid = ((j-i)/2) + i;
+        if(arr[mid]==x){
+            fi = mid;
+            j = mid;
+        }
+        else if(arr[mid]>x){
+            j = mid;
         }
         else{
-            if(arr[i]==x) li = i;
+            i = mid+1;
         }
     }
+    
+    i=0;
+    j=n;
+    while(i<j){
+        int mid = ((j-i)/2) + i;
+        if(arr[mid]==x){
+            li = mid;
+            i = mid+1;
+        }
+        else if(arr[mid]>x){
+            j = mid;
+        }
+        else{
+            i = mid+1;
+        }
+    }
+    
     vector<int> ans;
+    
     ans.push_back(fi);
     ans.push_back(li);
     return ans;

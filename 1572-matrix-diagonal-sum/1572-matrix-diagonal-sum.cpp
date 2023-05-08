@@ -8,8 +8,6 @@ public:
         int ans = 0;
         for(int k=0;k<n;k++){
             ans+=mat[k][i++];
-        }
-        for(int k=0;k<n;k++){
             ans+=mat[k][j--];
         }
         if(n%2!=0) ans-=mat[n/2][m/2];

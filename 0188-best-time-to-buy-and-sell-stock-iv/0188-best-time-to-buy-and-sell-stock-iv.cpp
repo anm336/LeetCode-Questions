@@ -5,17 +5,14 @@ public:
         if(i==prices.size()) return 0;
         
         if(dp[i][buy][t] != -1) return dp[i][buy][t];
-        int profit = 0;
+        int price = 0;
         if(buy){
-            profit = max(-prices[i] + func(prices, i+1, 0, t, dp) , 0 + func(prices, i+1, 1, t, dp));
+            price = max(-prices[i] + func(prices, i+1, 0, t, dp), 0 + func(prices, i+1, 1, t, dp));
         }
-        
         else{
-            profit = max(prices[i] + func(prices, i+1, 1, t-1, dp) , 0 + func(prices, i+1, 0, t, dp));
+            price = max(prices[i] + func(prices, i+1, 1, t-1, dp), 0 + func(prices, i+1, 0, t, dp));
         }
-        
-        return dp[i][buy][t] = profit;
-        
+        return dp[i][buy][t] = price;
     }
     int maxProfit(int k, vector<int>& prices) {
         int n = prices.size();

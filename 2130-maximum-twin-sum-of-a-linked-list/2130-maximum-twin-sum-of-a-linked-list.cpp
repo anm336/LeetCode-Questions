@@ -11,32 +11,32 @@
 class Solution {
 public:
     int pairSum(ListNode* head) {
-        int n = 0;
-        ListNode* tempa = head;
+        ListNode* slow = head;
+        ListNode* fast = head;
         
-        while(tempa!=NULL){
-            n++;
-            tempa = tempa -> next;
+        while(fast!=NULL && fast-> next!=NULL){
+            slow = slow-> next;
+            fast = fast-> next-> next;
         }
         
-        vector<int> sums;
-        int x = 0;
-        ListNode* temp = head;
-        while(x<n/2){
-            sums.push_back(temp-> val);
-            temp = temp-> next;
-            x++;
+        //Reverse 2nd half;
+        ListNode* next;
+        ListNode* prev = NULL;
+        while(slow != NULL){
+            next = slow-> next;
+            slow-> next = prev;
+            prev = slow;
+            slow = next;
         }
         
-        int y = n/2-1;
-        
-        while(x<n){
-            sums[y] += temp-> val;
-            temp = temp-> next;
-            x++;
-            y--;
+        int maxsum = 0;
+        ListNode* start = head;
+        while(prev!= NULL){
+            maxsum = max(maxsum, head-> val + prev-> val);
+            head = head-> next;
+            prev = prev-> next;
         }
         
-        return *max_element(sums.begin(), sums.end());
+        return maxsum;
     }
 };

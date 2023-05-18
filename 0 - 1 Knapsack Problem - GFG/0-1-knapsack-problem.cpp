@@ -13,12 +13,12 @@ class Solution
             if(wt[0]<=remcap) return val[0];
             else return 0;
         }
-        if(dp[index][remcap]!=-1) return dp[index][remcap];
+        if(dp[index][remcap] != -1) return dp[index][remcap];
+        
         int inc = 0;
-        if(wt[index]<=remcap) inc = (val[index] + fun(wt, val, remcap-wt[index], index-1, dp));
+        if(wt[index]<=remcap) inc = val[index] + fun(wt, val, remcap-wt[index], index-1, dp);
         int exc = 0 + fun(wt, val, remcap, index-1, dp);
         return dp[index][remcap] = max(inc, exc);
-        
     }
     
     int knapSack(int W, int wt[], int val[], int n) 

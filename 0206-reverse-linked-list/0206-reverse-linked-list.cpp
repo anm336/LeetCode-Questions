@@ -10,18 +10,27 @@
  */
 class Solution {
 public:
+    ListNode* func(ListNode* prev, ListNode* curr){
+        if(curr == NULL) return prev;
+        ListNode* next = curr-> next;
+        curr-> next = prev;
+        return func(curr, next);
+    }
+    
     ListNode* reverseList(ListNode* head) {
-        if(head == NULL) return NULL;
-        ListNode* prev = NULL;
-        ListNode* next;
-        ListNode* temp = head;
-        while(temp!=NULL){
-            next = temp-> next;
-            temp-> next = prev;
-            prev = temp;
-            temp = next;
-        }
+//         if(head == NULL) return NULL;
+//         ListNode* prev = NULL;
+//         ListNode* next;
+//         ListNode* temp = head;
+//         while(temp!=NULL){
+//             next = temp-> next;
+//             temp-> next = prev;
+//             prev = temp;
+//             temp = next;
+//         }
         
-        return prev;
+//         return prev;
+        ListNode* root = head;
+        return func(NULL, root);
     }
 };

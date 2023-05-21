@@ -2,19 +2,18 @@ class Solution {
 public:
     vector<string> ans;
     
-    void func(int n, int fc, int bc, vector<vector<int>> &dp, string temp){
+    void func(int n, int fc, int bc, string temp){
         if(fc==n && bc==n){
             ans.push_back(temp);
             return;
         }
         
-        if(fc<n) func(n, fc+1, bc, dp, temp+"(");
-        if(bc<fc) func(n, fc, bc+1, dp, temp+")");
+        if(fc<n) func(n, fc+1, bc, temp+"(");
+        if(bc<fc) func(n, fc, bc+1, temp+")");
     }
     
     vector<string> generateParenthesis(int n) {
-        vector<vector<int>> dp(n+1, vector<int>(n+1, -1));
-        func(n, 1, 0, dp, "(");
+        func(n, 1, 0, "(");
         
         return ans;
     }

@@ -17,7 +17,6 @@ class Solution {
         while(!q.empty()){
             int x = q.size();
             
-            while(x--){
                 int a = q.front();
                 q.pop();
                 ans.push_back(a);
@@ -26,7 +25,6 @@ class Solution {
                     if(vis[adj[a][i]] == -1) q.push(adj[a][i]);
                     vis[adj[a][i]] = 1;
                 }
-            }
         }
         
         return ans;

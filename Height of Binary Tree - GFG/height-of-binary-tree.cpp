@@ -98,21 +98,31 @@ struct Node
 */
 class Solution{
     public:
-    int getheight(Node* node, int x){
-        int left = x;
-        int right = x;
-        if(node-> left!= NULL) left = getheight(node-> left, x+1);
-        if(node-> right!= NULL) right = getheight(node-> right, x+1);
-        return max(left, right);
+    int ans = 1;
+    
+    int func(Node* root){
+        if(root == NULL) return 0;
+        
+        int lh = 0;
+        int rh = 0;
+        
+        if(root-> left != NULL) lh = func(root-> left);
+        if(root-> right != NULL) rh = func(root-> right);
+        
+        return 1+max(lh, rh);
     }
+    
     //Function to find the height of a binary tree.
     int height(struct Node* node){
-        if(node==NULL) return 0;
-        int left = 1;
-        int right = 1;
-        if(node-> left!= NULL) left = getheight(node-> left, 2);
-        if(node-> right!= NULL) right = getheight(node-> right, 2);
-        return max(left, right);
+        if(node == NULL) return 0;
+        
+        int lh = 0;
+        int rh = 0;
+        
+        if(node-> left != NULL) lh = func(node-> left);
+        if(node-> right != NULL) rh = func(node-> right);
+        
+        return 1+max(lh, rh);
         // code here 
     }
 };

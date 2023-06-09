@@ -6,16 +6,17 @@ public:
         sort(nums.begin(), nums.end());
         
         for(int i=0;i<n-2;i++){
+            int target = -nums[i];
             int j = i+1;
             int k = n-1;
             
             while(j<k){
-                int sum = nums[i] + nums[j] + nums[k];
+                int sum = nums[j] + nums[k];
                 
-                if(sum == 0){
+                if(sum == target){
                     tans.insert({nums[i], nums[j], nums[k]});
                 }
-                if(sum>0) k--;
+                if(sum>target) k--;
                 else j++;
             }
         }

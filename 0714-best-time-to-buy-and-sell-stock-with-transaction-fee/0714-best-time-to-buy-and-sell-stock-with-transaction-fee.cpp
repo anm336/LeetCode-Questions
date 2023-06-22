@@ -37,8 +37,8 @@ public:
     
     int maxProfit(vector<int>& prices, int fee) {
         int n = prices.size();
-        vector<vector<int>> dp(n+1, vector<int> (2, -1));
-        //return tabulation(prices, fee, dp);
-        return func(prices, fee, 0, 1, dp);
+        vector<vector<int>> dp(n+1, vector<int> (2));
+        return tabulation(prices, fee, dp);
+        //return func(prices, fee, 0, 1, dp);
     }
 };

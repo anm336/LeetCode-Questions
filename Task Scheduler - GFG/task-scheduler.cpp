@@ -20,13 +20,18 @@ class Solution {
             if(x.second>maxi)
             {
                 maxi=x.second;
-                cnt=0;
+                cnt=1;
             }
             else if(x.second==maxi)cnt++;
         }
         
-        if(N-maxi>(K*(maxi-1))) return N;
-        int ans=maxi+K*(maxi-1)+(cnt);
+        //For max frequency
+        //(maxi-1) is for all occurences of max freq element except last one
+        //(K+1) is to denote the size of a block after which again max freq element can appear, no sooner than it
+        //(cnt) at last denotes count of max elements at tail of processes as further there will be no process, so no need to take care of cooldown
+        int intervals = (maxi-1)*(K+1)+cnt;
+        int ans = max(N, intervals);
+        
         return ans;
     }
 };

@@ -10,48 +10,47 @@ class Solution
     int spanningTree(int V, vector<vector<int>> adj[])
     {
         // code here
-        vector<int> wts(V, INT_MAX);
-        vector<bool> mst(V, false);
+        int ans = 0;
+        
+        //To hold min. weights
+        vector<int> key(V, INT_MAX);
+        //To hold parent of node
         vector<int> par(V, -1);
+        //To check if node included in mst
+        vector<bool> mst(V, false);
         
-        //0 assumed as source;
+        //Start from 0th
+        key[0] = 0;
         par[0] = -1;
-        wts[0] = 0;
         
+        //Do this V times to take every vertex in mst
         for(int i=0;i<V;i++){
-            //Get the minimum weight wali node
             int mini = INT_MAX;
             int u;
-            
+            //Choose the node with min weight/key(not yet included in mst), that will be included in MST
             for(int j=0;j<V;j++){
-                if(mst[j]==false && wts[j]<mini){
-                    mini = wts[j];
+                if(mst[j]==false && key[j]<mini){
+                    mini = key[j];
                     u = j;
                 }
             }
             
-            //Mark mst of it as true as, ab wo mst mei include ho jaegi
+            //Mark it as true, now it's included in MST
             mst[u] = true;
             
-            //Check its adjacent Node
-            for(auto neighbour: adj[u]){
-                int nnode = neighbour[0];
-                int wt = neighbour[1];
+            //Now, update min key for its neighbours, that are not yet included in mst
+            for(auto neigh: adj[u]){
+                int v = neigh[0];
+                int w = neigh[1];
                 
-                if(mst[nnode] == false && wt < wts[nnode]){
-                    //cout<<nnode<<" "<<wt<<endl;
-                    wts[nnode] = wt;
-                    par[nnode] = u;
+                if(mst[v]==false && w<key[v]){
+                    key[v] = w;
+                    par[v] = u;
                 }
             }
         }
         
-        
-        int ans = 0;
-        for(int i=0;i<V;i++){
-            //cout<<wts[i]<<endl;
-            ans+=wts[i];
-        }
+        for(auto x: key) ans+=x;
         
         return ans;
     }

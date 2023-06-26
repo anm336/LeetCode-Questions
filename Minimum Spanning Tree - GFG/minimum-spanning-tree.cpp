@@ -7,50 +7,67 @@ class Solution
 {
 	public:
 	//Function to find sum of weights of edges of the Minimum Spanning Tree.
+	static bool comp(vector<int> &A, vector<int> &B){
+	    return A[2]<B[2];
+	}
+	
+	void setpr(vector<int> &par, vector<int> &rank, int V){
+	    for(int i=0;i<V;i++){
+	        par[i] = i;
+	        rank[i] = 0;
+	    }
+	}
+	
+	int findParent(int node, vector<int> &par){
+	    if(par[node] == node) return node;
+	    return par[node] = findParent(par[node], par);
+	}
+	
+	void unionSet(int u, int v, vector<int> &par, vector<int> &rank){
+	    if(rank[u]<rank[v]) par[u] = v;
+	    else if(rank[v]<rank[u]) par[v] = u;
+	    else{
+	        //If equal
+	        par[u] = v;
+	        rank[v]++;
+	    }
+	}
+	
     int spanningTree(int V, vector<vector<int>> adj[])
     {
         // code here
         int ans = 0;
+        vector<int> par(V);
+        vector<int> rank(V);
+        vector<vector<int>> edges;
         
-        //To hold min. weights
-        vector<int> key(V, INT_MAX);
-        //To hold parent of node
-        vector<int> par(V, -1);
-        //To check if node included in mst
-        vector<bool> mst(V, false);
+        setpr(par, rank, V);
         
-        //Start from 0th
-        key[0] = 0;
-        par[0] = -1;
-        
-        //Do this V times to take every vertex in mst
+        //Make edges
         for(int i=0;i<V;i++){
-            int mini = INT_MAX;
-            int u;
-            //Choose the node with min weight/key(not yet included in mst), that will be included in MST
-            for(int j=0;j<V;j++){
-                if(mst[j]==false && key[j]<mini){
-                    mini = key[j];
-                    u = j;
-                }
-            }
-            
-            //Mark it as true, now it's included in MST
-            mst[u] = true;
-            
-            //Now, update min key for its neighbours, that are not yet included in mst
-            for(auto neigh: adj[u]){
-                int v = neigh[0];
-                int w = neigh[1];
-                
-                if(mst[v]==false && w<key[v]){
-                    key[v] = w;
-                    par[v] = u;
-                }
+            vector<vector<int>> temp = adj[i];
+            for(int j=0;j<temp.size();j++){
+                vector<int> edge;
+                edge.push_back(i);
+                edge.push_back(temp[j][0]);
+                edge.push_back(temp[j][1]);
+                edges.push_back(edge);
             }
         }
         
-        for(auto x: key) ans+=x;
+        sort(edges.begin(), edges.end(), comp);
+        
+        for(int i=0;i<edges.size();i++){
+            int u = findParent(edges[i][0], par);
+            int v = findParent(edges[i][1], par);
+            int w = edges[i][2];
+            //cout<<u<<" "<<v<<" "<<w<<endl;
+            
+            if(u!=v){
+                unionSet(u, v, par, rank);
+                ans+=w;
+            }
+        }
         
         return ans;
     }

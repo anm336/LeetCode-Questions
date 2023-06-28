@@ -61,7 +61,7 @@ public:
             }
         }
         
-        for(auto x: myboard) cout<<x<<" ";
+        //for(auto x: myboard) cout<<x<<" ";
         return helper(myboard, s);
         //return 0;
     }

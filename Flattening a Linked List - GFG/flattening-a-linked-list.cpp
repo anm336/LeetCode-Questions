@@ -120,28 +120,24 @@ Node* mergeTwo(Node* root1, Node* root2){
     
     while(temp1 && temp2){
         if(temp1-> data < temp2-> data){
-            Node* node = new Node(temp1-> data);
-            temp-> bottom = node;
+            temp-> bottom = temp1;
             temp1 = temp1-> bottom;
         }
         else{
-            Node* node = new Node(temp2-> data);
-            temp-> bottom = node;
+            temp-> bottom = temp2;
             temp2 = temp2-> bottom;
         }
         temp = temp-> bottom;
     }
     
     while(temp1){
-        Node* node = new Node(temp1-> data);
-        temp-> bottom = node;
+        temp-> bottom = temp1;
         temp1 = temp1-> bottom;
         temp = temp-> bottom;
     }
     
     while(temp2){
-        Node* node = new Node(temp2-> data);
-        temp-> bottom = node;
+        temp-> bottom = temp2;
         temp2 = temp2-> bottom;
         temp = temp-> bottom;
     }

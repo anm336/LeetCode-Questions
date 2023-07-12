@@ -1,10 +1,11 @@
 class Solution {
 public:
-    bool dfs(int i, vector<vector<int>> &graph, vector<int> &status, vector<int> &ans, vector<bool> &inStack){
+    bool dfs(int i, vector<vector<int>> &graph, vector<int> &status, vector<bool> &inStack){
         if(graph[i].size() == 0){
             status[i] = 1;
             return true;
         }
+        //Already stored answers
         if(status[i]!=0){
             if(status[i]==1) return true;
             return false;
@@ -13,7 +14,7 @@ public:
         inStack[i] = true;
         bool val = true;
         for(auto x: graph[i]){
-            if(!inStack[x] && dfs(x, graph, status, ans, inStack)){
+            if(!inStack[x] && dfs(x, graph, status, inStack)){
                 continue;
             }
             else{
@@ -35,7 +36,7 @@ public:
         vector<bool> inStack(n, false);
         
         for(int i=0;i<n;i++){
-            dfs(i, graph, status, ans, inStack);
+            dfs(i, graph, status, inStack);
         }
         
         for(int i=0;i<status.size();i++){

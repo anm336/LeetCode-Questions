@@ -26,7 +26,7 @@ public:
             if(m.count(temp)) toAdd = m[temp];
             
             m[arr[i]] = 1+toAdd;
-            ans = max(ans, m[arr[i]]);
+            ans = max(ans, 1+toAdd);
         }
         
         return ans;

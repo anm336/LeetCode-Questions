@@ -21,5 +21,5 @@ repeating character is as follow-
 </pre>
 <p>&nbsp;</p>
 <p><span style="font-size: 18px;"><strong>Your Task:</strong><br>You don't need to read or print anything. Your task is to complete the function&nbsp;<strong>FirstNonRepeating()&nbsp;</strong>which takes A as input parameter and returns a string after processing the input stream.</span><br>&nbsp;</p>
-<p><span style="font-size: 18px;"><strong>Expected Time Complexity:&nbsp;</strong>O(26 * n)<br><strong>Expected Space Complexity:&nbsp;</strong>O(26)</span><br>&nbsp;</p>
+<p><span style="font-size: 18px;"><strong>Expected Time Complexity:&nbsp;</strong>O(n)<br><strong>Expected Space Complexity:&nbsp;</strong>O(n)</span><br>&nbsp;</p>
 <p><span style="font-size: 18px;"><strong>Constraints:</strong><br>1 &lt;= n &lt;= 10<sup>5</sup></span></p></div>

@@ -94,7 +94,7 @@ class Solution {
     a duplicate subtree of size 2 or more else returns false*/
     
     string func(Node* root, unordered_map<string, int> &mp){
-        if(root==NULL) return "$";
+        if(root==NULL) return " ";
         
         if(root-> left==NULL && root-> right==NULL) return to_string(root-> data);
         

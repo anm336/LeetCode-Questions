@@ -4,9 +4,8 @@ public:
         int n = bank.size();
         int prev = 0, ans = 0;
         for(int i=0;i<n;i++){
-            string temp = bank[i];
             int cnt = 0;
-            for(auto x: temp){
+            for(auto x: bank[i]){
                 if(x=='1') cnt++;
             }
             

@@ -15,4 +15,20 @@ public:
         }
         return ans.size();
     }
+    
+    int lis(int input1, int input2[]){
+        int n = input1;
+        if(n==0) return 0;
+        
+        vector<int> ans;
+        ans.push_back(input2[0]);
+        for(int i=1;i<n;i++){
+            if(input2[i]>ans.back()) ans.push_back(input2[i]);
+            else{
+                int index = lower_bound(ans.begin(), ans.end(), input2[i]) - ans.begin();
+                ans[index] = input2[i]; 
+            }
+        }
+        return ans.size();
+    }
 };
